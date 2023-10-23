@@ -1,4 +1,6 @@
-Following images are added for the project:
+## Images Used in Project Creation
+
+For this project, we used the images of the Wonders of the World. They are:
 
 1. [Chichen Itza, Mexico](https://en.wikipedia.org/wiki/Chichen_Itza)
 2. [Christ the Redeemer, Brazil](https://en.wikipedia.org/wiki/Christ_the_Redeemer_(statue))
