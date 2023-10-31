@@ -10,3 +10,5 @@ For this project, we used the images of the Wonders of the World. They are:
 6. [Petra, Jordan](https://en.wikipedia.org/wiki/Petra)
 7. [Taj Mahal, India](https://en.wikipedia.org/wiki/Taj_Mahal)
 8. [The Great Pyramid of Giza, Egypt](https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza) (honorary mention)
+
+All the images are of size 1200 x 800 and in RGB format.
