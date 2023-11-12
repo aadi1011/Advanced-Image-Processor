@@ -1,4 +1,4 @@
-# Image-Processing-Tools
+# Advanced Image Processor
 A repository with a list of popular image processing operations and functions.
 
 **To-Do:** Streamlit Deployment
