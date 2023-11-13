@@ -534,3 +534,175 @@ Region Splitting is a recursive image segmentation technique used in image proce
 
 Region Splitting is a versatile segmentation method that provides hierarchical and adaptive segmentation results, making it valuable in applications where detailed information about different regions of an image is needed. Careful consideration of parameters and stopping conditions is essential for its successful implementation.
 """
+
+
+st.set_page_config(
+    page_title="About - Advanced Image Processor",
+    page_icon="🖼️",
+    layout="centered",
+    initial_sidebar_state="expanded",
+)
+
+st.sidebar.title("💡About")
+st.sidebar.subheader("This is a web app to perform and learn about image processing techniques on a given input image.")
+if st.sidebar.button("ℹ️ Home Page"):
+   switch_page("Advanced_Image_Processor")
+
+st.sidebar.title("👨🏽‍💻Developer")
+st.sidebar.info(
+    "This app is created by **Aadith Sukumar**\n"
+    "\n🤝🏽[**Connect on LinkedIn**](https://www.linkedin.com/in/aadith-sukumar) \n"
+    "\n👾[**Follow on GitHub**](https://www.github.com/aadi1011)\n"
+)
+
+st.title("Advanced Image Processor")
+
+st.markdown("---")
+
+method_choice = st.selectbox("Choose an Image Processing Method to Learn More About:",("About The Project", 
+                                                                                          "Fourier Domain Transform", 
+                                                                                          "Edge Detection",
+                                                                                          "Image Segmentation",
+                                                                                          "Region-Based Methods"))
+
+if method_choice == "About The Project":
+   st.header("About the Project")
+   st.markdown(About_Project_Text)
+
+elif method_choice == "Fourier Domain Transform":
+   st.header("Fourier Domain Transform")
+   technique_choice = st.selectbox("Choose a Fourier Domain Transform Technique to Learn More About:",("Fourier Domain Transform",
+                                                                                                         "Butterworth Filters", 
+                                                                                                         "Blurring Technique",
+                                                                                                         "Sharpening Technique",
+                                                                                                         "Gaussian Noise",
+                                                                                                         "Salt and Pepper Noise"))
+   
+   if technique_choice == "Fourier Domain Transform":
+      st.markdown("---")
+      st.markdown(Fourier_Domain_Text)
+      st.markdown("---")
+
+   elif technique_choice == "Butterworth Filters":
+      st.markdown("---")
+      st.markdown(Butterworth_Filter_Text)
+      st.markdown("---")
+
+   elif technique_choice == "Blurring Technique":
+      st.markdown("---")
+      st.markdown(Blur_Text)
+      st.markdown("---")
+
+   elif technique_choice == "Sharpening Technique":
+      st.markdown("---")
+      st.markdown(Sharpen_Text)
+      st.markdown("---")
+
+   elif technique_choice == "Gaussian Noise":
+      st.markdown("---")
+      st.markdown(Gaussian_Noise_Text)
+      st.markdown("---")
+
+   elif technique_choice == "Salt and Pepper Noise":
+      st.markdown("---")
+      st.markdown(Salt_Pepper_Noise_Text)
+      st.markdown("---")
+
+elif method_choice == "Edge Detection":
+   st.header("Edge Detection")
+   technique_choice = st.selectbox("Choose an Edge Detection Technique to Learn More About:",("Edge Detection",
+                                                                                               "Sobel Operator", 
+                                                                                               "Prewitt Operator",
+                                                                                               "Roberts Cross Operator",
+                                                                                               "Canny Edge Detector"))
+   
+   if technique_choice == "Edge Detection":
+      st.markdown("---")
+      st.markdown(Edge_Detection_Text)
+      st.markdown("---")
+   
+   elif technique_choice == "Sobel Operator":
+      st.markdown("---")
+      st.markdown(Sobel_Text)
+      st.markdown("---")
+
+   elif technique_choice == "Prewitt Operator":
+      st.markdown("---")
+      st.markdown(Prewitt_Text)
+      st.markdown("---")
+
+   elif technique_choice == "Roberts Cross Operator":
+      st.markdown("---")
+      st.markdown(Roberts_Text)
+      st.markdown("---")
+
+   elif technique_choice == "Canny Edge Detector":
+      st.markdown("---")
+      st.markdown(Canny_Text)
+      st.markdown("---")
+
+elif method_choice == "Image Segmentation":
+   st.header("Image Segmentation")
+   technique_choice = st.selectbox("Choose an Image Segmentation Technique to Learn More About:",("Peak Signal-to-Noise Ratio",
+                                                                                                    "Binary Thresholding",
+                                                                                                    "Truncated Thresholding",
+                                                                                                    "To Zero Thresholding",
+                                                                                                    "Otsu's Thresholding",
+                                                                                                    "Gaussian Thresholding",
+                                                                                                    "Adaptive Thresholding",
+                                                                                                    "Region Growing Method",
+                                                                                                    "Region Splitting Method"))
+   
+   if technique_choice == "Peak Signal-to-Noise Ratio":
+      st.markdown("---")
+      st.markdown(PSNR_Text)
+      st.markdown("---")
+
+   elif technique_choice == "Binary Thresholding":
+      st.markdown("---")
+      st.markdown(Binary_Thresholding_Text)
+      st.markdown("---")
+
+   elif technique_choice == "Truncated Thresholding":
+      st.markdown("---")
+      st.markdown(Truncated_Thresholding_Text)
+      st.markdown("---")
+
+   elif technique_choice == "To Zero Thresholding":
+      st.markdown("---")
+      st.markdown(To_Zero_Thresholding_Text)
+      st.markdown("---")
+
+   elif technique_choice == "Otsu's Thresholding":
+      st.markdown("---")
+      st.markdown(Otsu_Thresholding_Text)
+      st.markdown("---")
+
+   elif technique_choice == "Gaussian Thresholding":
+      st.markdown("---")
+      st.markdown(Gaussian_Thresholding_Text)
+      st.markdown("---")
+
+   elif technique_choice == "Adaptive Thresholding":
+      st.markdown("---")
+      st.markdown(Adaptive_Thresholding_Text)
+      st.markdown("---")
+
+   elif technique_choice == "Region Growing Method":
+      st.markdown("---")
+      st.markdown(Region_Growing_Text)
+      st.markdown("---")
+
+   elif technique_choice == "Region Splitting Method":
+      st.markdown("---")
+      st.markdown(Region_Splitting_Text)
+      st.markdown("---")
+
+elif method_choice == "Region-Based Methods":
+   st.markdown("---")
+   st.header("Region-Based Methods")
+   st.markdown("---")
+   st.markdown(Region_Growing_Text)
+   st.markdown("---")
+   st.markdown(Region_Splitting_Text)
+   st.markdown("---")
