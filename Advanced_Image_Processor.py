@@ -128,3 +128,44 @@ def ED_roberts(img):
 def ED_canny(img, upper_threshold, lower_threshold):
     canny_img = cv2.Canny(img, upper_threshold, lower_threshold)
     return canny_img
+
+def PSNR(img1, img2):
+    mse = np.mean((img1 - img2)**2)
+    if mse == 0:
+        return 100
+    PIXEL_MAX = 255.0
+    psnr = 20 * np.log10(PIXEL_MAX / np.sqrt(mse))
+    return psnr
+
+def IS_binary_thresholding(img, threshold):
+    ret, thresh_img = cv2.threshold(img, threshold, 255, cv2.THRESH_BINARY)
+    return thresh_img
+
+def IS_inverse_binary_thresholding(img, threshold):
+    ret, thresh_img = cv2.threshold(img, threshold, 255, cv2.THRESH_BINARY_INV)
+    return thresh_img
+
+def IS_truncated_thresholding(img, threshold):
+    ret, thresh_img = cv2.threshold(img, threshold, 255, cv2.THRESH_TRUNC)
+    return thresh_img
+
+def IS_to_zero_thresholding(img, threshold):
+    ret, thresh_img = cv2.threshold(img, threshold, 255, cv2.THRESH_TOZERO)
+    return thresh_img
+
+def IS_otsu_thresholding(img):
+    ret, thresh_img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    return thresh_img
+
+def IS_gaussian_thresholding(img):
+    ret, thresh_img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    return thresh_img
+
+def IS_mean_adaptive_thresholding(img, block_size, constant):
+    thresh_img = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, block_size, constant)
+    return thresh_img
+
+def IS_gaussian_adaptive_thresholding(img, block_size, constant):
+    thresh_img = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, block_size, constant)
+    return thresh_img
+
