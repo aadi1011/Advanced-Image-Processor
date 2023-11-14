@@ -169,7 +169,6 @@ def IS_gaussian_adaptive_thresholding(img, block_size, constant):
     thresh_img = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, block_size, constant)
     return thresh_img
 
-
 def RBM_region_growing(img, seed, threshold):
     neighbours = [(0,1), (1,0), (0,-1), (-1,0)]
     region_threshold = threshold
@@ -220,3 +219,319 @@ def RBM_region_splitting(img, threshold):
         segmented_image = np.vstack([np.hstack([resized_regions[0], resized_regions[1]]),
                                      np.hstack([resized_regions[2], resized_regions[3]])])
         return segmented_image
+
+
+#################### STREAMLIT APP ####################
+
+# Defining the main function
+def main():
+    # Setting the title of the app
+
+    st.set_page_config(
+    page_title="Advanced Image Processor",
+    page_icon="🖼️",
+    layout="centered",
+    initial_sidebar_state="expanded",
+    )
+
+    st.title("Advanced Image Processor")
+
+    st.markdown("---")
+
+    #################### SIDEBAR ####################
+    st.sidebar.title("💡About")
+    st.sidebar.subheader("This is a web app to perform and learn about image processing techniques on a given input image.")
+    if st.sidebar.button("ℹ️ More Info"):
+        switch_page("About and Techniques")
+
+    st.sidebar.title("👨🏽‍💻Developer")
+    st.sidebar.info(
+        "This app is created by **Aadith Sukumar**\n"
+        "\n🤝🏽[**Connect on LinkedIn**](https://www.linkedin.com/in/aadith-sukumar) \n"
+        "\n👾[**Follow on GitHub**](https://www.github.com/aadi1011)\n"
+    )
+    ########################################
+    
+    uploaded_file = st.file_uploader("Choose an image", type=['jpg', 'png', 'jpeg'])
+    
+    if uploaded_file is not None:
+        options = ["None", "Fourier Domain Filtering", "Edge Detection", "Image Segmentation", "Region-Based Methods"]
+        choice = st.selectbox("Select the method you want to apply", options)
+
+        # Checking if the user has selected a technique
+        if choice == "None":
+            st.warning("Please select a technique")
+
+        elif choice == "Fourier Domain Filtering":
+            technique = st.selectbox("Select the type of filter", ("Low Pass Filter", "High Pass Filter", "Blur Image", "Sharpen Image", "Gaussian Noise", "Salt and Pepper Noise"))
+    
+            if technique == "Low Pass Filter":
+                D0 = st.slider("Select the cutoff frequency", 0, 100, 30)
+                n = st.slider("Select the order of the filter", 1, 10, 2)
+                img = np.array(Image.open(uploaded_file))
+                img_filt = FDF_lowpass(img, D0, n)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+            
+            elif technique == "High Pass Filter":
+                D0 = st.slider("Select the cutoff frequency", 0, 100, 30)
+                n = st.slider("Select the order of the filter", 1, 10, 2)
+                img = np.array(Image.open(uploaded_file))
+                img_filt = FDF_highpass(img, D0, n)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+            elif technique == "Blur Image":
+                kernel_size = st.slider("Select the kernel size", 1, 100, 5)
+                img = np.array(Image.open(uploaded_file))
+                img_filt = FDF_blur(img, kernel_size)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+            elif technique == "Sharpen Image":
+                kernel_size = st.slider("Select the kernel size", 1, 100, 5)                
+                img = np.array(Image.open(uploaded_file))
+                img_filt = FDF_sharpen(img, kernel_size)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+            elif technique == "Gaussian Noise":
+                mean = st.slider("Select the mean", 0, 100, 0)
+                stddev = st.slider("Select the standard deviation", 0, 100, 10)
+                img = np.array(Image.open(uploaded_file))
+                img_filt = FDF_gaussian_noise(img, mean, stddev)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+            elif technique == "Salt and Pepper Noise":
+                val = st.slider("Select the noise density", 0.0, 1.0, 0.5)
+                img = np.array(Image.open(uploaded_file))
+                img_filt = FDF_salt_pepper_noise(img, val)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+        elif choice == "Edge Detection":
+            technique = st.selectbox("Select the type of filter", ("Sobel Filter", "Prewitt Filter", "Roberts Filter", "Canny Edge Detection"))
+        
+            if technique == "Sobel Filter":
+                kernel_size = st.slider("Select the kernel size", 1, 31, 5, step=2)
+                img = np.array(Image.open(uploaded_file))
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                
+                img_filt = ED_sobel(img, kernel_size)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+            elif technique == "Prewitt Filter":
+                img = np.array(Image.open(uploaded_file))
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                
+                img_filt = ED_prewitt(img)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+            elif technique == "Roberts Filter":
+                img = np.array(Image.open(uploaded_file))
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                
+                img_filt = ED_roberts(img)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+            elif technique == "Canny Edge Detection":
+                upper_threshold = st.slider("Select the upper threshold", 0, 255, 100)
+                lower_threshold = st.slider("Select the lower threshold", 0, 255, 50)
+                img = np.array(Image.open(uploaded_file))
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                
+                img_filt = ED_canny(img, upper_threshold, lower_threshold)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+        elif choice == "Image Segmentation":
+            technique = st.selectbox("Select the type of filter", ("Binary Thresholding", "Inverse Binary Thresholding", "Truncated Thresholding", "To Zero Thresholding", "Otsu Thresholding", "Gaussian Thresholding", "Mean Adaptive Thresholding", "Gaussian Adaptive Thresholding"))
+
+            if technique == "Binary Thresholding":
+                threshold = st.slider("Select the threshold", 0, 255, 100)
+                img = np.array(Image.open(uploaded_file))
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                
+                img_filt = IS_binary_thresholding(img, threshold)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+            elif technique == "Inverse Binary Thresholding":
+                threshold = st.slider("Select the threshold", 0, 255, 100)
+                img = np.array(Image.open(uploaded_file))
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                
+                img_filt = IS_inverse_binary_thresholding(img, threshold)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+            elif technique == "Truncated Thresholding":
+                threshold = st.slider("Select the threshold", 0, 255, 100)
+                img = np.array(Image.open(uploaded_file))
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                
+                img_filt = IS_truncated_thresholding(img, threshold)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+            elif technique == "To Zero Thresholding":
+                threshold = st.slider("Select the threshold", 0, 255, 100)
+                img = np.array(Image.open(uploaded_file))
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                
+                img_filt = IS_to_zero_thresholding(img, threshold)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+            elif technique == "Otsu Thresholding":
+                img = np.array(Image.open(uploaded_file))
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                
+                img_filt = IS_otsu_thresholding(img)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+            elif technique == "Gaussian Thresholding":
+                img = np.array(Image.open(uploaded_file))
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                
+                img_filt = IS_gaussian_thresholding(img)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+            elif technique == "Mean Adaptive Thresholding":
+                block_size = st.slider("Select the block size", 3, 255, 5, step=2)
+                constant = st.slider("Select the constant", 0, 255, 5)
+                img = np.array(Image.open(uploaded_file))
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                
+                img_filt = IS_mean_adaptive_thresholding(img, block_size, constant)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+            elif technique == "Gaussian Adaptive Thresholding":
+                block_size = st.slider("Select the block size", 3, 255, 5, step=2)
+                constant = st.slider("Select the constant", 0, 255, 5)
+                img = np.array(Image.open(uploaded_file))
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)                                
+                img_filt = IS_gaussian_adaptive_thresholding(img, block_size, constant)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+        elif choice == "Region-Based Methods":
+            technique = st.selectbox("Select the type of filter", ("Region Growing", "Region Splitting"))
+
+            if technique == "Region Growing":
+                threshold = st.slider("Select the threshold", 0, 255, 100)
+                img = np.array(Image.open(uploaded_file))
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                height, width = img.shape
+                seed = (height//2, width//2)
+                img_filt = RBM_region_growing(img, seed, threshold)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+            elif technique == "Region Splitting":
+                threshold = st.slider("Select the threshold", 0, 255, 100)
+                img = np.array(Image.open(uploaded_file))
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                img_filt = RBM_region_splitting(img, threshold)
+                st.pyplot(plot_image(img_filt))
+                try:
+                    st.write("PSNR: ", PSNR(img, img_filt))
+                except ValueError as ve:
+                    st.warning(f"Could not calculate PSNR Value for this method")
+                if st.checkbox("Show Histogram"):
+                    st.pyplot(plot_histogram(img_filt))
+
+
+if __name__ == "__main__":  
+    main()
