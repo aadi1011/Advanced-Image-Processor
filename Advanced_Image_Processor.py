@@ -169,3 +169,54 @@ def IS_gaussian_adaptive_thresholding(img, block_size, constant):
     thresh_img = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, block_size, constant)
     return thresh_img
 
+
+def RBM_region_growing(img, seed, threshold):
+    neighbours = [(0,1), (1,0), (0,-1), (-1,0)]
+    region_threshold = threshold
+    height, width = img.shape
+    visited = np.zeros_like(img)
+    segmented_img = np.zeros_like(img)
+    stack = []
+    stack.append(seed)
+    seed_intensity = img[seed]
+    while len(stack) > 0:
+        current_pixel = stack.pop()
+        x, y = current_pixel
+        if 0 <= x < height and 0 <= y < width and visited[x,y] == 0:
+            intensity_diff = abs(int(img[x,y]) - int(seed_intensity))
+
+            if intensity_diff <= region_threshold:
+                segmented_img[x,y] = 255
+                visited[x,y] = 1
+                for neighbour in neighbours:
+                    neighbour_x = x + neighbour[0]
+                    neighbour_y = y + neighbour[1]
+                    stack.append((neighbour_x, neighbour_y))
+    
+    return segmented_img
+
+def RBM_region_splitting(img, threshold):
+    height, width = img.shape
+    if height <= 1 or width <= 1:
+        return img
+
+    mean_value = np.mean(img)
+    if mean_value <= threshold:
+        return np.zeros_like(img)
+    else:
+        half_height = height // 2
+        half_width = width // 2
+        regions = []
+        regions.append(img[:half_height, :half_width])
+        regions.append(img[:half_height, half_width:])
+        regions.append(img[half_height:, :half_width])
+        regions.append(img[half_height:, half_width:])
+        segmented_regions = [RBM_region_splitting(region, threshold) for region in regions]
+        # Ensure all regions have the same dimensions before concatenating
+        max_height = max(region.shape[0] for region in segmented_regions)
+        max_width = max(region.shape[1] for region in segmented_regions)
+        # Resize regions to match the maximum dimensions
+        resized_regions = [np.pad(region, ((0, max_height - region.shape[0]), (0, max_width - region.shape[1])), 'constant') for region in segmented_regions]
+        segmented_image = np.vstack([np.hstack([resized_regions[0], resized_regions[1]]),
+                                     np.hstack([resized_regions[2], resized_regions[3]])])
+        return segmented_image
