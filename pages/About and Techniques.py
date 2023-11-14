@@ -535,7 +535,6 @@ Region Splitting is a recursive image segmentation technique used in image proce
 Region Splitting is a versatile segmentation method that provides hierarchical and adaptive segmentation results, making it valuable in applications where detailed information about different regions of an image is needed. Careful consideration of parameters and stopping conditions is essential for its successful implementation.
 """
 
-
 st.set_page_config(
     page_title="About - Advanced Image Processor",
     page_icon="🖼️",
