@@ -37,7 +37,7 @@ Welcome to the Advanced Image Processor! This web application is built using Ope
 
 The app is deployed using [Streamlit](https://www.streamlit.io/) and can be accessed by going to the following link in your web-browser:
 
-[advanced-image-processing.streamlit.app](https://advanced-image-processing.streamlit.app/)
+🔗 **[advanced-image-processing.streamlit.app](https://advanced-image-processing.streamlit.app/)**
 
 ## Usage
 
