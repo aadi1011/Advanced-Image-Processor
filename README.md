@@ -1,6 +1,6 @@
 <h1 align='center'> Advanced Image Processor 🖼️</h1>
 
-![App Screenshot](assets/readme/mainpage.png)
+![image](https://github.com/aadi1011/Advanced-Image-Processor/assets/62766172/346f820e-73a3-4e02-af8c-58af205ab59f)
 
 ## Overview
 
@@ -47,6 +47,9 @@ The app is deployed using [Streamlit](https://www.streamlit.io/) and can be acce
 4. Explore the transformed image and related metrics.
 
 To get an understanding of how these image processing techniques work, visit the [`About and Techniques`](https://advanced-image-processing.streamlit.app/About_and_Techniques) page in the application.
+
+![image](https://github.com/aadi1011/Advanced-Image-Processor/assets/62766172/f4541f1e-0a76-4777-aae9-fad61b0143d2)
+
 
 ## Developer
 
