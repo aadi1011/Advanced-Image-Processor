@@ -53,7 +53,7 @@ To get an understanding of how these image processing techniques work, visit the
 
 ## Developer
 
-This web app is developed by [Aadith Sukumar]. Connect with me on LinkedIn: [LinkedIn Profile](https://www.linkedin.com/in/aadith-sukumar).
+This web app is developed by **Aadith Sukumar**. Connect with me on LinkedIn: [LinkedIn Profile](https://www.linkedin.com/in/aadith-sukumar).
 
 ## License
 
