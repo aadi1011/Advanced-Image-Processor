@@ -1,6 +1,8 @@
 <h1 align='center'> Advanced Image Processor 🖼️</h1>
 
-![image](https://github.com/aadi1011/Advanced-Image-Processor/assets/62766172/346f820e-73a3-4e02-af8c-58af205ab59f)
+![GitHub License](https://img.shields.io/github/license/aadi1011/Advanced-Image-Processor) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/aadi1011/Advanced-Image-Processor) ![Static Badge](https://img.shields.io/badge/View_On_Streamlit-S?logo=streamlit&labelColor=gray&color=yellow&link=advanced-image-processing.streamlit.app)
+
+![1mainpage](https://github.com/aadi1011/Advanced-Image-Processor/assets/62766172/1e461c8e-6090-47be-80a3-980b8ca5dfe4)
 
 ## Overview
 
@@ -48,7 +50,7 @@ The app is deployed using [Streamlit](https://www.streamlit.io/) and can be acce
 
 To get an understanding of how these image processing techniques work, visit the [`About and Techniques`](https://advanced-image-processing.streamlit.app/About_and_Techniques) page in the application.
 
-![image](https://github.com/aadi1011/Advanced-Image-Processor/assets/62766172/f4541f1e-0a76-4777-aae9-fad61b0143d2)
+![2aboutpage](https://github.com/aadi1011/Advanced-Image-Processor/assets/62766172/8e81337c-37bc-4f4b-ae57-877f68f353bd)
 
 
 ## Developer
