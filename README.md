@@ -2,9 +2,20 @@
 
 <div align="center">
 
-![GitHub License](https://img.shields.io/github/license/aadi1011/Advanced-Image-Processor) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/aadi1011/Advanced-Image-Processor) ![Static Badge](https://img.shields.io/badge/View_On_Streamlit-S?logo=streamlit&labelColor=gray&color=yellow&link=advanced-image-processing.streamlit.app)
+  <a href="https://github.com/aadi1011/Advanced-Image-Processor/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/aadi1011/Advanced-Image-Processor" alt="GitHub License">
+  </a>
+  
+  <a href="https://github.com/aadi1011/Advanced-Image-Processor/tree/main">
+    <img src="https://img.shields.io/github/languages/code-size/aadi1011/Advanced-Image-Processor" alt="GitHub code size in bytes">
+  </a>
+  
+  <a href="https://advanced-image-processing.streamlit.app/">
+    <img src="https://img.shields.io/badge/View_On_Streamlit-S?logo=streamlit&labelColor=gray&color=yellow&link=advanced-image-processing.streamlit.app" alt="Static Badge">
+  </a>
 
 </div>
+
 
 ![1mainpage](https://github.com/aadi1011/Advanced-Image-Processor/assets/62766172/1e461c8e-6090-47be-80a3-980b8ca5dfe4)
 
