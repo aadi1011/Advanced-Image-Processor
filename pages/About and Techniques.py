@@ -567,6 +567,15 @@ method_choice = st.selectbox("Choose an Image Processing Method to Learn More Ab
 if method_choice == "About The Project":
    st.header("About the Project")
    st.markdown(About_Project_Text)
+   st.markdown(
+    "[![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/aadi0x01)](https://twitter.com/aadi0x01)"
+    "&nbsp;&nbsp; [![GitHub followers](https://img.shields.io/github/followers/aadi1011?label=Followers&logo=github&color=white)](https://github.com/aadi1011) "
+    "&nbsp;&nbsp; [![Last Updated](https://img.shields.io/github/last-commit/aadi1011/Advanced-Image-Processor/main?label=Last%20Updated)](https://github.com/aadi1011/Advanced-Image-Processor)"
+   )
+
+
+
+
 
 elif method_choice == "Fourier Domain Transform":
    st.header("Fourier Domain Transform")
