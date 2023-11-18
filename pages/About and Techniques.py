@@ -17,7 +17,7 @@ Looking ahead, our project envisions exciting prospects, including the integrati
 
 In essence, our project underscores the profound power and versatility of image processing techniques and visual data analysis. Through meticulous implementation and creative problem-solving, we have successfully elevated the quality and interpretability of any given image, emphasizing the expansive potential of image processing across diverse fields.
 
-\- [**Aadith Sukumar**](www.github.com/aadi1011)
+\- [**Aadith Sukumar**](www.linkedin.com/in/aadith-sukumar)
 """
 
 Fourier_Domain_Text = """
