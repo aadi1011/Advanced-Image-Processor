@@ -76,3 +76,8 @@ Connect with me on LinkedIn: [LinkedIn Profile](https://www.linkedin.com/in/aadi
 ## License
 
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details. While reuse and distribution of this software, it would be great if you could give the developer the rightful credits as well. Let's keep the community growing!
+
+## Updates
+
+More updates are lined up for this project. If you have any suggestions, feel free to create a new issue
+
