@@ -95,8 +95,6 @@ def FDF_sharpen(img, kernel_size):
     return sharpen_img
 
 def FDF_gaussian_noise(img, mean, stddev):
-    #mean = img.mean()
-    #stddev = img.std()
     noise = np.random.normal(mean, stddev, img.shape)
     noise_img = img + noise
     return noise_img
