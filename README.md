@@ -79,6 +79,8 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 ## Updates
 
+Upcoming Ideas:
+  - Automating best threshold values
 More updates are lined up for this project. If you have any suggestions, feel free to create a new issue
 
 ---
